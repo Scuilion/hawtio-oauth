@@ -1,5 +1,4 @@
 /// <reference path="googleOAuthHelpers.ts"/>
-
 namespace GoogleOAuth {
 
   HawtioOAuth.oauthPlugins.push('GoogleOAuth');

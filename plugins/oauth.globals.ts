@@ -1,6 +1,7 @@
 // variable for getting openshift oauth config from
 declare let OSOAuthConfig;
 declare let GoogleOAuthConfig;
+declare let KubernetesTokenConfig;
 
 // variable set by server script that contains oauth settings
 declare let HAWTIO_OAUTH_CONFIG;

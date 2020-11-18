@@ -2,6 +2,7 @@
 /// <reference path="example.globals.ts"/>
 /// <reference path="page1.controller.ts"/>
 /// <reference path="github.controller.ts"/>
+/// <reference path="kubernetes.controller.ts"/>
 
 namespace Example {
 
@@ -12,6 +13,7 @@ namespace Example {
     .run(addLogoutToUserDropdown)
     .controller("Example.Page1Controller", page1Controller)
     .controller("Example.Page2Controller", page2Controller)
+    .controller("Example.Page3Controller", page3Controller)
     .name;
 
   function addRoutes($routeProvider: angular.route.IRouteProvider) {
@@ -19,7 +21,8 @@ namespace Example {
 
     $routeProvider
       .when('/github', { templateUrl: UrlHelpers.join(Example.templatePath, 'github.html') })
-      .when('/openshift', { templateUrl: UrlHelpers.join(Example.templatePath, 'page1.html') });
+      .when('/openshift', { templateUrl: UrlHelpers.join(Example.templatePath, 'page1.html') })
+      .when('/kubernetes', { templateUrl: UrlHelpers.join(Example.templatePath, 'kubernetes.html') });
   }
 
   function addTabs(mainNavService: Nav.MainNavService): void {
@@ -33,6 +36,11 @@ namespace Example {
     mainNavService.addItem({
       title: 'GitHub',
       href: 'github',
+    });
+
+    mainNavService.addItem({
+      title: 'Kubernetes',
+      href: 'kubernetes',
     });
   }
 
@@ -64,7 +72,28 @@ namespace Example {
   }, true);
   */
 
+  // Kubernetes
+  hawtioPluginLoader.registerPreBootstrapTask({
+    name: 'ExampleKubernetesConfig',
+    task: (next) => {
+      KubernetesToken.config = {
+        token: "eyJhbGci",
+      };
+      next();
+    }
+  }, true);
+    hawtioPluginLoader.registerPreBootstrapTask({
+    name: 'test-init',
+    depends: ['hawtio-oauth'],
+    task: (next) => {
+      let token = HawtioOAuth.getOAuthToken();
+      log.info("token" + token)
+      next();
+    }
+  });
+
   // Standard Keycloak server
+  /*
   hawtioPluginLoader.registerPreBootstrapTask({
     name: 'ExampleKeycloakConfig',
     task: (next) => {
@@ -76,6 +105,7 @@ namespace Example {
       next();
     }
   }, true);
+   */
 
   // openshift
   /*

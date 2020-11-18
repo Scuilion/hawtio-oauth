@@ -1,6 +1,7 @@
 /// <reference path="oauth.helper.ts"/>
 /// <reference path="github/ts/githubPlugin.ts"/>
 /// <reference path="googleOAuth/ts/googleOAuthPlugin.ts"/>
+/// <reference path="kubernetes/ts/kubernetes.plugin.ts"/>
 /// <reference path="osOAuth/ts/osOAuthPlugin.ts"/>
 /// <reference path="keycloak/keycloak.module.ts"/>
 
@@ -12,6 +13,7 @@ namespace HawtioOAuth {
       GithubOAuth.pluginName,
       GoogleOAuth.pluginName,
       HawtioKeycloak.pluginName,
+      KubernetesToken.pluginName,
       OSOAuth.pluginName
     ])
     .run(addProductInfo)
